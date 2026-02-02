@@ -1,1 +1,0 @@
-# potvrzeni-dar
