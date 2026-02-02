@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Potvrzení o daru – Příběháři</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1>Potvrzení o daru</h1>
+      <p>
+        Děkujeme za podporu projektu Příběháři. Vyplň prosím údaje, které potřebujeme k vystavení potvrzení o přijetí daru pro daňové účely.
+      </p>
+    </header>
+
+    <section class="card">
+      <form
+        name="potvrzeni-o-daru"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thanks.html"
+        class="form"
+        id="donationForm"
+      >
+        <!-- Netlify required hidden input -->
+        <input type="hidden" name="form-name" value="potvrzeni-o-daru" />
+        <p class="honeypot">
+          <label>Nech tohle prázdné: <input name="bot-field" /></label>
+        </p>
+
+        <div class="segmented" role="radiogroup" aria-label="Typ dárce">
+          <label class="segmented__item">
+            <input type="radio" name="donorType" value="FO" checked />
+            <span>Fyzická osoba</span>
+          </label>
+          <label class="segmented__item">
+            <input type="radio" name="donorType" value="PO" />
+            <span>Právnická osoba</span>
+          </label>
+        </div>
+
+        <!-- FO fields -->
+        <div class="group" id="foFields">
+          <div class="row">
+            <div class="field">
+              <label for="firstName">Jméno <span class="req">*</span></label>
+              <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label for="lastName">Příjmení <span class="req">*</span></label>
+              <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="emailFO">E-mail <span class="req">*</span></label>
+              <input id="emailFO" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phoneFO">Telefon</label>
+              <input id="phoneFO" name="phone" type="tel" autocomplete="tel" placeholder="+420…" />
+            </div>
+          </div>
+        </div>
+
+        <!-- PO fields -->
+        <div class="group hidden" id="poFields" aria-hidden="true">
+          <div class="row">
+            <div class="field">
+              <label for="companyName">Název společnosti <span class="req">*</span></label>
+              <input id="companyName" name="companyName" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="ico">IČO <span class="req">*</span></label>
+              <input id="ico" name="ico" type="text" inputmode="numeric" placeholder="12345678" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="contactPerson">Kontaktní osoba <span class="req">*</span></label>
+              <input id="contactPerson" name="contactPerson" type="text" />
+            </div>
+            <div class="field">
+              <label for="emailPO">E-mail <span class="req">*</span></label>
+              <input id="emailPO" name="email_po" type="email" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="phonePO">Telefon</label>
+              <input id="phonePO" name="phone_po" type="tel" autocomplete="tel" placeholder="+420…" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Address (shared) -->
+        <div class="group">
+          <h2 class="sectionTitle">Adresa pro potvrzení</h2>
+          <div class="row">
+            <div class="field field--full">
+              <label for="street">Ulice a číslo <span class="req">*</span></label>
+              <input id="street" name="street" type="text" autocomplete="street-address" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="city">Město <span class="req">*</span></label>
+              <input id="city" name="city" type="text" autocomplete="address-level2" required />
+            </div>
+            <div class="field">
+              <label for="zip">PSČ <span class="req">*</span></label>
+              <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Donation details -->
+        <div class="group">
+          <h2 class="sectionTitle">Údaje o daru</h2>
+          <div class="row">
+            <div class="field">
+              <label for="amount">Částka daru (Kč) <span class="req">*</span></label>
+              <input id="amount" name="amount" type="number" inputmode="numeric" min="1" step="1" required />
+              <p class="hint">Prosím uveď částku, kterou jsi odeslal/a.</p>
+            </div>
+            <div class="field">
+              <label for="sentDate">Datum odeslání daru <span class="req">*</span></label>
+              <input id="sentDate" name="sentDate" type="date" required />
+              <p class="hint">Pomůže nám to rychle spárovat platbu na účtu.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- GDPR + newsletter -->
+        <div class="group">
+          <div class="checkbox">
+            <input id="gdpr" name="gdprConsent" type="checkbox" required />
+            <label for="gdpr">
+              Souhlasím se zpracováním osobních údajů za účelem vystavení potvrzení o daru.
+              Podrobnosti najdeš v
+              <a href="/ochrana-osobnich-udaju" target="_blank" rel="noopener noreferrer">Ochrana osobních údajů</a>.
+              <span class="req">*</span>
+            </label>
+          </div>
+
+          <div class="checkbox">
+            <input id="newsletter" name="newsletter" type="checkbox" />
+            <label for="newsletter">Chci dostávat občasné novinky o projektu Příběháři.</label>
+          </div>
+        </div>
+
+        <div class="errorBox hidden" id="errorBox" role="alert" aria-live="polite"></div>
+
+        <button class="btn" type="submit">Odeslat údaje k potvrzení</button>
+
+        <p class="footerNote">
+          Potvrzení o daru pošleme e-mailem po zpracování platby.
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
